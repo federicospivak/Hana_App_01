@@ -1,0 +1,14 @@
+{
+  "CROSS_SCHEMA_SFLIGHT_00": {
+    "object_owner": {
+      "roles": [
+        "SFLIGHT_CONTAINER_ACCESS"
+      ]
+    }, 
+    "application_user": {
+      "roles": [
+        "SFLIGHT_CONTAINER_ACCESS"
+      ]
+    }
+  }
+}
