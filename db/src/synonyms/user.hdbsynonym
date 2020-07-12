@@ -1,0 +1,9 @@
+{
+  "UserData.User": {
+    "target": {
+      "object": "UserData.User",
+      "schema": "SCHEMA_USER_00_1",
+      "database": "SYSTEMDB"
+    }
+  }
+}

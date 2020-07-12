@@ -10,7 +10,7 @@
         "@sap/hana-client": "^2.5.86"
     },
     "engines": {
-        "node": "10.16.0"
+        "node": "^10 || ^12"
     },
     "scripts": {
         "build": "cds build",
