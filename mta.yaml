@@ -9,10 +9,12 @@ modules:
       memory: 256M
       disk-quota: 512M
     requires:
-      - name: app1-db-hdi-container
+      - name: cross-container-service-2
         properties:
-          TARGET_CONTAINER: '~{hdi-container-name}'
-      - name: grant-service
+          key: ServiceName_2
+          service: '~{the-service-name}'
+        group: SERVICE_REPLACEMENTS
+      - name: cross-container-service-1
         properties:
           key: ServiceName_1
           service: '~{the-service-name}'
@@ -22,6 +24,9 @@ modules:
         properties:
           key: hdi-user-service
           service: '~{user-container-name}'
+      - name: app1-db-hdi-container
+        properties:
+          TARGET_CONTAINER: '~{hdi-container-name}'
   - name: app1-srv
     type: nodejs
     path: srv
@@ -37,6 +42,14 @@ modules:
   - name: web
     type: html5
     path: web
+    requires:
+      - name: app1_00-uaa
+      - name: xsjs_api
+        group: destinations
+        properties:
+          name: xsjs_api
+          url: '~{url}'
+          forwardAuthToken: true
   - name: user_db
     type: hdb
     path: user_db
@@ -44,17 +57,24 @@ modules:
       - name: hdi_user_db
         properties:
           TARGET_CONTAINER: '~{user-container-name}'
+  - name: xsjs
+    type: nodejs
+    path: xsjs
+    provides:
+      - name: xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: app1-db-hdi-container
+      - name: app1_00-uaa
+      - name: app1-db
+      - name: sap.hana.democontent.epm.services.images
+      - name: CROSS_SCHEMA_FLIGHT
 resources:
   - name: app1-db-hdi-container
     type: com.sap.xs.hdi-container
     properties:
       hdi-container-name: '${service-name}'
-  - name: grant-service
-    type: org.cloudfoundry.existing-service
-    parameters:
-      service-name: CROSS_SCHEMA_SFLIGHT_00
-    properties:
-      the-service-name: '${service-name}'
   - name: cross-container-service-1
     parameters:
       service-name: CROSS_SCHEMA_SFLIGHT_00
@@ -68,3 +88,23 @@ resources:
     properties:
       user-container-name: '${service-name}'
     type: com.sap.xs.hdi-container
+  - name: cross-container-service-2
+    parameters:
+      service-name: opensap-central-container
+    properties:
+      the-service-name: '${service-name}'
+    type: org.cloudfoundry.existing-service
+  - name: app1_00-uaa
+    type: com.sap.xs.uaa-space
+    parameters:
+      path: xs-security.json
+  - name: sap.hana.democontent.epm.services.images
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: sap.hana.democontent.epm.services.images.00
+    properties:
+      xshttpdest-images-service-name: '${service-name}'
+  - name: CROSS_SCHEMA_FLIGHT
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SFLIGHT_00

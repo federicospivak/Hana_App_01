@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="PRODUCTS" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="PRODUCTS"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MD.BusinessPartner">
+    <resourceUri>MD.BusinessPartner</resourceUri>
+  </DataSource>
+  <DataSource id="MD.Products">
+    <resourceUri>MD.Products</resourceUri>
+  </DataSource>
+  <DataSource id="MD.Addresses">
+    <resourceUri>MD.Addresses</resourceUri>
+  </DataSource>
+  <DataSource id="Util.Texts">
+    <resourceUri>Util.Texts</resourceUri>
+  </DataSource>
+  <DataSource id="Product_Desc$$$$Util.Texts$$">
+    <resourceUri>Util.Texts</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Products_BP" cardinality="C1_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="PARTNERID"/>
+      <viewAttribute id="ADDRESSES_ADDRESSID"/>
+      <viewAttribute id="COMPANYNAME"/>
+      <viewAttribute id="PRODUCTID"/>
+      <viewAttribute id="TYPECODE"/>
+      <viewAttribute id="CATEGORY"/>
+      <viewAttribute id="NAMEID"/>
+      <viewAttribute id="DESCID"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="PRICE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MD.BusinessPartner">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSES_ADDRESSID" source="ADDRESSES.ADDRESSID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
+    </input>
+    <input node="MD.Products">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPECODE" source="TYPECODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="CATEGORY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAMEID" source="NAMEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DESCID" source="DESCID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRICE" source="PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="SUPPLIER.PARTNERID"/>
+    </input>
+    <joinAttribute name="PARTNERID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Address_BP" cardinality="C1_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="PARTNERID"/>
+      <viewAttribute id="COMPANYNAME"/>
+      <viewAttribute id="PRODUCTID"/>
+      <viewAttribute id="TYPECODE"/>
+      <viewAttribute id="ProductCategory"/>
+      <viewAttribute id="NAMEID"/>
+      <viewAttribute id="DESCID"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="PRICE"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="POSTALCODE"/>
+      <viewAttribute id="STREET"/>
+      <viewAttribute id="BUILDING"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="REGION"/>
+      <viewAttribute id="ADDRESSTYPE"/>
+      <viewAttribute id="VALIDITY_STARTDATE"/>
+      <viewAttribute id="VALIDITY_ENDDATE"/>
+      <viewAttribute id="LATITUDE"/>
+      <viewAttribute id="LONGITUDE"/>
+      <viewAttribute id="POINT"/>
+      <viewAttribute hidden="true" id="JOIN$ADDRESSES_ADDRESSID$ADDRESSID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Products_BP">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPECODE" source="TYPECODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ProductCategory" source="CATEGORY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAMEID" source="NAMEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DESCID" source="DESCID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRICE" source="PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ADDRESSES_ADDRESSID$ADDRESSID" source="ADDRESSES_ADDRESSID"/>
+    </input>
+    <input node="MD.Addresses">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STREET" source="STREET"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BUILDING" source="BUILDING"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSTYPE" source="ADDRESSTYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALIDITY_STARTDATE" source="VALIDITY.STARTDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALIDITY_ENDDATE" source="VALIDITY.ENDDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LATITUDE" source="LATITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUDE" source="LONGITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POINT" source="POINT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ADDRESSES_ADDRESSID$ADDRESSID" source="ADDRESSID"/>
+    </input>
+    <joinAttribute name="JOIN$ADDRESSES_ADDRESSID$ADDRESSID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Product_Name" cardinality="C1_1" joinType="textTable" languageColumn="LANGUAGE">
+    <viewAttributes>
+      <viewAttribute id="PARTNERID"/>
+      <viewAttribute id="COMPANYNAME"/>
+      <viewAttribute id="PRODUCTID"/>
+      <viewAttribute id="TYPECODE"/>
+      <viewAttribute id="ProductCategory"/>
+      <viewAttribute id="DESCID"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="PRICE"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="POSTALCODE"/>
+      <viewAttribute id="STREET"/>
+      <viewAttribute id="BUILDING"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="REGION"/>
+      <viewAttribute id="ADDRESSTYPE"/>
+      <viewAttribute id="VALIDITY_STARTDATE"/>
+      <viewAttribute id="VALIDITY_ENDDATE"/>
+      <viewAttribute id="LATITUDE"/>
+      <viewAttribute id="LONGITUDE"/>
+      <viewAttribute id="POINT"/>
+      <viewAttribute id="ProductName"/>
+      <viewAttribute hidden="true" id="JOIN$NAMEID$TEXTID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Address_BP">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPECODE" source="TYPECODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ProductCategory" source="ProductCategory"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DESCID" source="DESCID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRICE" source="PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STREET" source="STREET"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BUILDING" source="BUILDING"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSTYPE" source="ADDRESSTYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALIDITY_STARTDATE" source="VALIDITY_STARTDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALIDITY_ENDDATE" source="VALIDITY_ENDDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LATITUDE" source="LATITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUDE" source="LONGITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POINT" source="POINT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NAMEID$TEXTID" source="NAMEID"/>
+    </input>
+    <input node="Util.Texts">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ProductName" source="TEXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NAMEID$TEXTID" source="TEXTID"/>
+    </input>
+    <joinAttribute name="JOIN$NAMEID$TEXTID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Product_Desc" cardinality="C1_1" joinType="textTable" languageColumn="LANGUAGE">
+    <viewAttributes>
+      <viewAttribute id="PARTNERID"/>
+      <viewAttribute id="COMPANYNAME"/>
+      <viewAttribute id="PRODUCTID"/>
+      <viewAttribute id="TYPECODE"/>
+      <viewAttribute id="ProductCategory"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="PRICE"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="POSTALCODE"/>
+      <viewAttribute id="STREET"/>
+      <viewAttribute id="BUILDING"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="REGION"/>
+      <viewAttribute id="ADDRESSTYPE"/>
+      <viewAttribute id="VALIDITY_STARTDATE"/>
+      <viewAttribute id="VALIDITY_ENDDATE"/>
+      <viewAttribute id="LATITUDE"/>
+      <viewAttribute id="LONGITUDE"/>
+      <viewAttribute id="POINT"/>
+      <viewAttribute id="ProductName"/>
+      <viewAttribute id="ProductDescription"/>
+      <viewAttribute hidden="true" id="JOIN$DESCID$TEXTID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Product_Name">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPECODE" source="TYPECODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ProductCategory" source="ProductCategory"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRICE" source="PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STREET" source="STREET"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BUILDING" source="BUILDING"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSTYPE" source="ADDRESSTYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALIDITY_STARTDATE" source="VALIDITY_STARTDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALIDITY_ENDDATE" source="VALIDITY_ENDDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LATITUDE" source="LATITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUDE" source="LONGITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POINT" source="POINT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ProductName" source="ProductName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DESCID$TEXTID" source="DESCID"/>
+    </input>
+    <input node="Product_Desc$$$$Util.Texts$$">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ProductDescription" source="TEXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DESCID$TEXTID" source="TEXTID"/>
+    </input>
+    <joinAttribute name="JOIN$DESCID$TEXTID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Product_Desc">
+  <attributes>
+    <attribute id="PARTNERID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Partner ID"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="PARTNERID"/>
+    </attribute>
+    <attribute id="COMPANYNAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Company Name"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="COMPANYNAME"/>
+    </attribute>
+    <attribute id="PRODUCTID" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Product ID"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="PRODUCTID"/>
+    </attribute>
+    <attribute id="TYPECODE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Type Code"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="TYPECODE"/>
+    </attribute>
+    <attribute id="ProductCategory" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Product Category"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="ProductCategory"/>
+    </attribute>
+    <attribute id="CURRENCY" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Currency"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="PRICE" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Price"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="PRICE"/>
+    </attribute>
+    <attribute id="CITY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="City"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="CITY"/>
+    </attribute>
+    <attribute id="POSTALCODE" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Postal Code"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="POSTALCODE"/>
+    </attribute>
+    <attribute id="STREET" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Street"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="STREET"/>
+    </attribute>
+    <attribute id="BUILDING" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Building Number"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="BUILDING"/>
+    </attribute>
+    <attribute id="COUNTRY" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Country"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="REGION" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Region Otherwise Known as State in some countries"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="REGION"/>
+    </attribute>
+    <attribute id="ADDRESSTYPE" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Address Type"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="ADDRESSTYPE"/>
+    </attribute>
+    <attribute id="VALIDITY_STARTDATE" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Start Date"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="VALIDITY_STARTDATE"/>
+    </attribute>
+    <attribute id="VALIDITY_ENDDATE" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="End Date"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="VALIDITY_ENDDATE"/>
+    </attribute>
+    <attribute id="LATITUDE" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Geo Latitude"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="LATITUDE"/>
+    </attribute>
+    <attribute id="LONGITUDE" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Geo Longitude"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="LONGITUDE"/>
+    </attribute>
+    <attribute id="POINT" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Geo Point"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="POINT"/>
+    </attribute>
+    <attribute id="ProductName" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Product Name"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="ProductName"/>
+    </attribute>
+    <attribute id="ProductDescription" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Product Description"/>
+      <keyMapping columnObjectName="Product_Desc" columnName="ProductDescription"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Products_BP" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="528"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="MD.BusinessPartner" modelObjectNameSpace="Products_BP" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="23" y="30"/>
+      <rectangleSize width="278.97265625"/>
+    </shape>
+    <shape modelObjectName="MD.Products" modelObjectNameSpace="Products_BP" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="278.97265625"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Address_BP" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="399"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Products_BP" modelObjectNameSpace="Address_BP" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="224.14990234375"/>
+    </shape>
+    <shape modelObjectName="MD.Addresses" modelObjectNameSpace="Address_BP" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="199.287109375"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Product_Name" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="103" y="283"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Address_BP" modelObjectNameSpace="Product_Name" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="203.7666015625"/>
+    </shape>
+    <shape modelObjectName="Util.Texts" modelObjectNameSpace="Product_Name" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="166.07763671875"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Product_Desc" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="101" y="175"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Product_Name" modelObjectNameSpace="Product_Desc" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="203.7666015625"/>
+    </shape>
+    <shape modelObjectName="Util.Texts" modelObjectNameSpace="Product_Desc" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="166.07763671875"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

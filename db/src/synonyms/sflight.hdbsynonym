@@ -10,18 +10,5 @@
       "object": "SBOOK",
       "schema": "SFLIGHT"
     }
-  },
-  "M_HOST_INFORMATION": {
-    "target": {
-      "object": "M_HOST_INFORMATION",
-      "schema": "SYS",
-      "database": "SYSTEMDB"
-    }
-  },
-  "XSA_INFO": {
-    "target": {
-      "object": "XSA_INFO",
-      "schema": "SYS_XSA"
-    }
   }
 }
